@@ -208,17 +208,6 @@
             overflow: hidden;
         }
 
-        .how-it-works::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background-color: var(--background-color);
-            transform: skewY(-3deg);
-        }
-
         .step-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -431,7 +420,9 @@
     <section id="home" class="hero">
         <div class="container">
             <h1>Stream - Control - Record</h1>
-            <p>Unlock the full potential of scrcpy with Space Stream. Experience all the power of scrcpy wrapped in a sleek, user-friendly interface. Control your Android device with unparalleled ease, enjoy lag-free streaming, and access advanced features - all for free.</p>
+            <p>Unlock the full potential of scrcpy with Space Stream. Experience all the power of scrcpy wrapped in a
+                sleek, user-friendly interface. Control your Android device with unparalleled ease, enjoy lag-free
+                streaming, and access advanced features - all for free.</p>
             <div class="hero-buttons">
                 <a href="#features" class="hero-btn hero-btn-primary">Learn More</a>
                 <a target="_blank" href="https://github.com/Awesomeali01" class="hero-btn hero-btn-github">
@@ -493,7 +484,7 @@
                 <div class="step-card">
                     <i class="fas fa-search"></i>
                     <h3>5. Find IP</h3>
-                    <p>Use the 'Find IP Address' button or check your phone's Wi-Fi settings for wireless connection.
+                    <p>Use the 'Find IP Address' button or check your phone's Wi-Fi settings for ip-address.</p>
                     </p>
                 </div>
                 <div class="step-card">
@@ -521,7 +512,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Space Stream by <a target="_blank" style="color: var(--text-color);" href="https://Portfoalio.vercel.app">The Space Dev 🐼</a>. Free for All.</p>
+            <p>&copy; 2024 Space Stream by <a target="_blank" style="color: var(--text-color);"
+                    href="https://Portfoalio.vercel.app">The Space Dev 🐼</a>. Free for All.</p>
         </div>
     </footer>
 
@@ -530,108 +522,106 @@
         data-message="Space Stream need your support 🫰❤️" data-color="var(--primary-color)" data-position="Right"
         data-x_margin="18" data-y_margin="18"></script>
 
-        <script>
-            gsap.registerPlugin(ScrollTrigger);
-    
-            // Utility function for smooth scrolling
-            function smoothScroll(target, duration = 1) {
-                const targetElement = document.querySelector(target);
-                const headerHeight = document.querySelector('header').offsetHeight;
-                
-                gsap.to(window, {
-                    duration: duration,
-                    scrollTo: {
-                        y: targetElement,
-                        offsetY: headerHeight
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Header content animation
+        gsap.from("header nav ", {
+            y: -20,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.2
+        });
+
+        // Hero section animations
+        gsap.from(".hero > .container > *", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.3,
+            ease: "power3.out"
+        });
+
+        // Function to animate cards
+        function animateCards(selector) {
+            const cards = gsap.utils.toArray(selector);
+            cards.forEach((card, index) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom-=100",
+                        toggleActions: "play none none none"
                     },
+                    y: 100,
+                    opacity: 0,
+                    duration: 1,
+                    delay: index * 0.1,
                     ease: "power3.out"
                 });
-            }
-    
-            // Header animation
-            gsap.from("header", {
-                y: -100,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
             });
-    
-            // Hero section animations
-            gsap.from(".hero > .container > *", { 
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: "power3.out"
-            });
-    
-            // Function to animate cards
-            function animateCards(selector) {
-                const cards = gsap.utils.toArray(selector);
-                cards.forEach((card, index) => {
-                    gsap.from(card, {
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top bottom-=100",
-                            toggleActions: "play none none none"
-                        },
-                        y: 100,
-                        opacity: 0,
-                        duration: 0.8,
-                        delay: index * 0.1,
-                        ease: "power3.out"
-                    });
-                });
-            }
-    
-            // Animate feature cards
-            animateCards('.feature-card');
-    
-            // Animate step cards
-            animateCards('.step-card');
-    
-            // Download section animations
-            const downloadElements = gsap.utils.toArray(".download > .container > *");
-            gsap.from(downloadElements, {
-                scrollTrigger: {
-                    trigger: ".download",
-                    start: "top bottom-=100",
-                    toggleActions: "play none none none"
-                },
-                y: 100,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power3.out"
-            });
-    
-            // Footer animation
-            gsap.from("footer", {
-                scrollTrigger: {
-                    trigger: "footer",
-                    start: "top bottom",
-                    toggleActions: "play none none none"
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-    
-            // Smooth scrolling for all internal links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+        }
+
+        // Animate feature cards
+        animateCards('.feature-card');
+
+        // Animate step cards
+        animateCards('.step-card');
+
+        // Download section animations
+        const downloadElements = gsap.utils.toArray(".download > .container > *");
+        gsap.from(downloadElements, {
+            scrollTrigger: {
+                trigger: ".download",
+                start: "top bottom-=100",
+                toggleActions: "play none none none"
+            },
+            y: 100,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.4,
+            ease: "power3.out"
+        });
+
+        // Footer animation
+        gsap.from("footer .container > *", {
+            scrollTrigger: {
+                trigger: "footer",
+                start: "top bottom",
+                toggleActions: "play none none none"
+            },
+            y: 20,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Smooth Scroll functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollLinks = document.querySelectorAll('a[href^="#"]');
+
+            scrollLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
                     e.preventDefault();
-                    smoothScroll(this.getAttribute('href'));
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        const headerOffset = document.querySelector('header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
-    
-            // Smooth scrolling for the download button in the header
-            document.querySelector('header .btn').addEventListener('click', function(e) {
-                e.preventDefault();
-                smoothScroll('#download');
-            });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
